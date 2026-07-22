@@ -2,6 +2,9 @@
   command = "yarn run build"
   publish = "public"
 
+# Node 16 ships with OpenSSL 1.1.1, so Gatsby 3 / webpack 4 build without
+# needing the --openssl-legacy-provider flag. That flag only exists on Node 17+
+# and, if set here, makes the Node 16 binary refuse to start (breaking Corepack
+# and yarn). So we pin Node 16 and leave NODE_OPTIONS unset.
 [build.environment]
   NODE_VERSION = "16"
-  NODE_OPTIONS = "--openssl-legacy-provider"
